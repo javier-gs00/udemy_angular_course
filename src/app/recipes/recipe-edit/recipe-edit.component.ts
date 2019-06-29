@@ -14,6 +14,11 @@ export class RecipeEditComponent implements OnInit {
   editMode = false
   recipeForm: FormGroup;
 
+  get ingredientControls() {
+    const ingredients = this.recipeForm.get('ingredients') as FormArray
+    return ingredients.controls
+  }
+
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
@@ -63,11 +68,6 @@ export class RecipeEditComponent implements OnInit {
       description: new FormControl(recipeDescription, Validators.required),
       ingredients: recipeIngredients
     })
-  }
-
-  getIngredientsControls() {
-    const ingredients = this.recipeForm.get('ingredients') as FormArray
-    return ingredients.controls
   }
 
   onAddIngredient() {
